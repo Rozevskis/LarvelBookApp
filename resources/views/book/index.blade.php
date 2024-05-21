@@ -5,7 +5,7 @@
          </a>
 <div class="mt-2 flex flex-wrap">
    @foreach ($books as $book)
-      <div class="w-1/4 rounded overflow-hidden shadow-lg p-4 bg-white relative m-2">
+      <div class="w-80 h-44 rounded overflow-hidden shadow-lg p-4 bg-white relative m-2">
          <div class="mb-4">
             <h2 class="text-xl font-bold mb-2">{{ $book->name }}</h2>
             <p class="text-gray-700 text-base">by {{ $book->author }}</p>
