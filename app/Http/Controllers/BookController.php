@@ -31,7 +31,17 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => ['required', 'string'],
+            'author' => ['required', 'string'],
+            'released_at' => ['required', 'date']
+        ]);
+
+        $data['user_id'] = $request->user()->id;
+        $book = Book::create($data);
+
+        return to_route('book.index', $book)->with('message', 'Book was created');
+        
     }
 
     /**
@@ -39,7 +49,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        return view('book.show');
+        return view('book.view', ['book' => $book]);
     }
 
     /**
@@ -47,7 +57,7 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        return view('book.edit');
+        return view('book.edit', ['book' => $book]);
     }
 
     /**
@@ -55,7 +65,16 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        //
+        $data = $request->validate([
+            'name' => ['required', 'string'],
+            'author' => ['required', 'string'],
+            'released_at' => ['required', 'date']
+        ]);
+
+        
+        $book->update($data);
+
+        return to_route('book.index', $book)->with('message', 'Book was Update');
     }
 
     /**
@@ -63,6 +82,7 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        $book->delete();
+        return to_route('book.index', $book)->with('message', 'Book was Deleted');
     }
 }
