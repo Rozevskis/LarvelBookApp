@@ -2,7 +2,7 @@
 
    <div class="mt-2 flex flex-wrap">
       @foreach ($books as $book)
-         <div class="w-72 h-44 rounded overflow-hidden shadow-lg p-4 bg-white relative m-2">
+         <div data-book-id="{{ $book->id }}" class="w-72 h-44 rounded overflow-hidden shadow-lg p-4 bg-white relative m-2">
             <div class="mb-4">
                <h2 class="text-xl font-bold mb-2">{{ $book->name }}</h2>
                <p class="text-gray-700 text-base">by {{ $book->author }}</p>
@@ -17,10 +17,10 @@
                      Edit
                </a>
 
-               <form action="{{ route('book.destroy', $book) }}" method="POST">
-                     @csrf
-                     @method('DELETE')
-                     <button type="submit" class="bg-red-500 text-white px-3 py-2 rounded">Delete</button>
+               <form id="delete-book-button" action="{{ route('book.destroy', $book) }}" method="POST" >
+                  @csrf
+                  @method('DELETE')
+                  <button type="submit" class="bg-red-500 text-white px-3 py-2 rounded">Delete</button>
                </form>
             </div>
          </div>

@@ -77,12 +77,10 @@ class BookController extends Controller
         return to_route('book.index', $book)->with('message', 'Book was Update');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    
     public function destroy(Book $book)
-    {
-        $book->delete();
-        return to_route('book.index', $book)->with('message', 'Book was Deleted');
-    }
+{
+    $book->delete();
+    return response()->noContent();
+}
 }
